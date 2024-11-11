@@ -1,14 +1,13 @@
 package com.example;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.KafkaStreams;
 import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.Topology;
 import org.apache.kafka.streams.kstream.KStream;
 import org.apache.kafka.streams.kstream.Produced;
-
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Iterator;
 
 public class WeatherStreamApp {
@@ -35,7 +34,7 @@ public class WeatherStreamApp {
 
                 // Prepare output format
                 StringBuilder processedData = new StringBuilder();
-                processedData.append("Temperature Details:\\n");
+                processedData.append("Temperature Details:\n");
 
                 // Iterate over temperature data
                 Iterator<JsonNode> elements = currentConditions.elements();
@@ -47,7 +46,7 @@ public class WeatherStreamApp {
                     String style = node.get(3).asText();
                     String tooltip = node.get(4).asText();
 
-                    processedData.append(String.format("Site: %s, Temperature: %s, Style: %s, Tooltip: %s\\n",
+                    processedData.append(String.format("Site: %s, Temperature: %s, Style: %s, Tooltip: %s\n",
                             site, temperature, style, tooltip));
                 }
 
@@ -64,7 +63,7 @@ public class WeatherStreamApp {
         // Set the properties for Kafka Streams
         java.util.Properties props = new java.util.Properties();
         props.put("application.id", "weather-stream-app");
-        props.put("bootstrap.servers", "localhost:9092");
+        props.put("bootstrap.servers", "kafka:9092");  // Kubernetes service name
         props.put("default.key.serde", Serdes.String().getClass());
         props.put("default.value.serde", Serdes.String().getClass());
 
