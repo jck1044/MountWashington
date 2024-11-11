@@ -1,4 +1,0 @@
-FROM openjdk:21-jdk-slim
-WORKDIR /app
-COPY weather-stream-app/build/libs/weather-stream-app-1.0.jar /app/weather-stream-app.jar
-CMD ["java", "-jar", "weather-stream-app.jar"]
