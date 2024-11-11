@@ -1,11 +1,4 @@
-# Use an OpenJDK image
 FROM openjdk:21-jdk-slim
-
-# Set the working directory
 WORKDIR /app
-
-# Copy the jar file into the container
-COPY /data-fetcher/build/libs/data-fetcher.jar /app/data-fetcher.jar
-
-# Run the jar file
+COPY /data-fetcher/build/libs/data-fetcher-1.0.jar /app/data-fetcher.jar
 CMD ["java", "-jar", "data-fetcher.jar"]
