@@ -1,0 +1,11 @@
+# Use an OpenJDK image
+FROM openjdk:21-jdk-slim
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the jar file into the container
+COPY weather-stream-app/build/libs/weather-stream-app.jar /app/weather-stream-app.jar
+
+# Run the jar file
+CMD ["java", "-jar", "weather-stream-app.jar"]

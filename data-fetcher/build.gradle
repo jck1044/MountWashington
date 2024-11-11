@@ -1,0 +1,26 @@
+plugins {
+    id("java")
+    id("application")
+}
+
+repositories {
+    mavenCentral() // Ensure this is present to fetch dependencies from Maven Central
+}
+
+dependencies {
+    implementation("org.apache.kafka:kafka-streams:3.5.1")
+    implementation("org.apache.kafka:kafka-clients:3.5.1")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.15.2")
+}
+
+application {
+    mainClass.set("com.example.DataFetcher") // Update with the fully qualified class name for DataFetcher
+}
+
+jar {
+    manifest {
+        attributes(
+                "Main-Class": "com.example.DataFetcher" // Replace with the correct package name for your main class
+        )
+    }
+}
