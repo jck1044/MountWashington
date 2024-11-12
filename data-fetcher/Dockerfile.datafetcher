@@ -1,4 +1,0 @@
-FROM openjdk:21-jdk-slim
-WORKDIR /app
-COPY /data-fetcher/build/libs/data-fetcher-1.0.jar /app/data-fetcher.jar
-CMD ["java", "-jar", "data-fetcher.jar"]
