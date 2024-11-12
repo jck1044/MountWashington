@@ -34,7 +34,7 @@ spec:
         - name: datafetcher
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command: ["java", "-cp", "/app/weather-kafka-app.jar", "com.example.DataFetcher"]
+          command: ["java", "-cp", "/app/data-fetcher.jar", "com.example.DataFetcher"]
           env:
             - name: KAFKA_BOOTSTRAP_SERVERS
               value: {{ .Values.kafka.bootstrapServers }}
@@ -56,7 +56,7 @@ spec:
         - name: weatherstream
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command: ["java", "-cp", "/app/weather-kafka-app.jar", "com.example.WeatherStreamApp"]
+          command: ["java", "-cp", "/app/weather-stream-app.jar", "com.example.WeatherStreamApp"]
           env:
             - name: KAFKA_BOOTSTRAP_SERVERS
               value: {{ .Values.kafka.bootstrapServers }}
