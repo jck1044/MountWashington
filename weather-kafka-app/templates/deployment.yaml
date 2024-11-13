@@ -39,13 +39,21 @@ spec:
             - name: KAFKA_BOOTSTRAP_SERVERS
               value: {{ .Values.kafka.bootstrapServers }}
           ports:
-            - name: http
-              containerPort: {{ .Values.service.port }}
+            - name: tcp
+              containerPort: 9092
               protocol: TCP
           livenessProbe:
-            {{- toYaml .Values.livenessProbe | nindent 12 }}
+            exec:
+              command: ["sh", "-c", "nc -z kafka.default.svc.cluster.local 9092"]
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            failureThreshold: 3
           readinessProbe:
-            {{- toYaml .Values.readinessProbe | nindent 12 }}
+            exec:
+              command: ["sh", "-c", "nc -z kafka.default.svc.cluster.local 9092"]
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            failureThreshold: 3
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           {{- with .Values.volumeMounts }}
@@ -61,13 +69,21 @@ spec:
             - name: KAFKA_BOOTSTRAP_SERVERS
               value: {{ .Values.kafka.bootstrapServers }}
           ports:
-            - name: http
-              containerPort: {{ .Values.service.port }}
+            - name: tcp
+              containerPort: 9092
               protocol: TCP
           livenessProbe:
-            {{- toYaml .Values.livenessProbe | nindent 12 }}
+            exec:
+              command: ["sh", "-c", "nc -z kafka.default.svc.cluster.local 9092"]
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            failureThreshold: 3
           readinessProbe:
-            {{- toYaml .Values.readinessProbe | nindent 12 }}
+            exec:
+              command: ["sh", "-c", "nc -z kafka.default.svc.cluster.local 9092"]
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            failureThreshold: 3
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           {{- with .Values.volumeMounts }}
