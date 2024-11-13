@@ -9,8 +9,8 @@ repositories {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
 }
 
 dependencies {
@@ -23,16 +23,12 @@ application {
     mainClass.set("com.example.WeatherStreamApp")
 }
 
-jar {
-    manifest {
-        attributes(
-                'Main-Class': 'com.example.WeatherStreamApp'
-        )
-    }
-}
-
 tasks.named("shadowJar").configure {
     archiveBaseName.set("weather-stream-app")
     archiveClassifier.set("")
     archiveVersion.set("1.0")
+}
+
+tasks.build {
+    dependsOn(tasks.shadowJar)
 }
