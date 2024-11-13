@@ -1,6 +1,9 @@
 # Use OpenJDK base image
 FROM openjdk:11-jre-slim
 
+# Install netcat
+RUN apt-get update && apt-get install -y netcat && rm -rf /var/lib/apt/lists/*
+
 # Create an app directory in the container
 WORKDIR /app
 
